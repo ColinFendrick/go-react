@@ -1,8 +1,21 @@
+import { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Home } from './comonents';
+import AppService from './services/AppService';
+import { Home } from './components';
 
 const App = () => {
+	useEffect(() => {
+		(async () => {
+			try {
+				const res = await AppService.get();
+				console.log(res);
+			} catch (e) {
+				console.log(e);
+			}
+
+		})();
+	});
 	return (
 		<div>
       Basic Setup:

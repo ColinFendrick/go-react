@@ -1,6 +1,6 @@
 import http from '../http-common';
 
-const get = http.get('');
+const get = () => http.get('/task');
 
 const service = { get };
 
