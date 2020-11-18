@@ -19,6 +19,6 @@ type ToDoList struct {
 type User struct {
 	ID       primitive.ObjectID
 	Name     string
-	email    string
+	Email    string
 	ToDoList ToDoList
 }
