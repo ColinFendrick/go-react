@@ -15,7 +15,7 @@ const connectionString = "mongodb+srv://admin:adminpassword@cluster0.wlrs3.mongo
 
 const dbName = "todos"
 
-const collName = "todolist"
+const collectionName = "todolist"
 
 var collection *mongo.Collection
 
@@ -39,7 +39,7 @@ func init() {
 
 	fmt.Println("Connected to MongoDB!")
 
-	collection = client.Database(dbName).Collection(collName)
+	collection = client.Database(dbName).Collection(collectionName)
 
 	fmt.Println("Collection instance created!")
 }
