@@ -47,24 +47,21 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(decodeErr)
 	}
 
-	_, existingErr := checkForDuplicate(user.Name)
-	if existingErr != nil {
-		log.Fatal(existingErr)
-	}
+	checkForDuplicate(user.Name)
 
 	addUser(user)
 	json.NewEncoder(w).Encode(user)
 }
 
-func checkForDuplicate(field interface{}) (models.User, error) {
+func checkForDuplicate(field interface{}) models.User {
 	var result models.User
 	filter := bson.D{primitive.E{Key: "Name", Value: field}}
 	err := collection.FindOne(context.Background(), filter).Decode(&result)
 	if err != nil {
-		return result, err
+		log.Fatal(err)
 	}
 
-	return result, nil
+	return result
 }
 
 func addUser(user models.User) {

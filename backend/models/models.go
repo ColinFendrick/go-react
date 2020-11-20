@@ -11,8 +11,8 @@ type ToDo struct {
 
 // ToDoList is simply a collection of Todos
 type ToDoList struct {
-	ID   primitive.ObjectID
-	ToDo []ToDo
+	ID    primitive.ObjectID
+	ToDos []ToDo
 }
 
 // User is the current user and their todo list
