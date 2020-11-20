@@ -55,12 +55,18 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	var task models.ToDoList
+	var user models.User
+	decodeErr := json.NewDecoder(r.Body).Decode(&user)
+	if decodeErr != nil {
+		log.Fatal(decodeErr)
+	}
+
 	_ = json.NewDecoder(r.Body).Decode(&task)
-	insertOneTask(task)
+	insertOneTask(user, task)
 	json.NewEncoder(w).Encode(task)
 }
 
-func insertOneTask(task models.ToDoList) {
+func insertOneTask(user models.User, task models.ToDoList) {
 	insertResult, err := collection.InsertOne(context.Background(), task)
 
 	if err != nil {
